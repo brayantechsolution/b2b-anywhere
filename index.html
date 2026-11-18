@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cabine Online — toque B2B com quem você quiser</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%2214%22 fill=%22%23111%22 stroke=%22%23ffb020%22 stroke-width=%223%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%224%22 fill=%22%2322d3c5%22/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="demoBanner" class="demo-banner" hidden>MODO DEMONSTRAÇÃO · TUDO LOCAL · ABRA EM DUAS ABAS PARA TESTAR</div>
+
+<!-- ===================== LOGIN / CADASTRO ===================== -->
+<section id="vAuth" class="view"><div class="center"><div class="card">
+  <div class="brand"><div class="logo"><b>CABINE</b><small>ESTÚDIO DE MIXAGEM · ONLINE</small></div><p>Toque B2B sincronizado com quem você quiser, de qualquer lugar.</p></div>
+  <div class="tabs"><button class="on" data-tab="in">ENTRAR</button><button data-tab="up">CRIAR CONTA</button></div>
+  <form id="authForm" autocomplete="on">
+    <div class="field" id="fUser" hidden><label>NOME DE DJ</label><input id="aUser" maxlength="24" placeholder="Ex.: DJ Brayan" autocomplete="nickname"></div>
+    <div class="field"><label>E-MAIL</label><input id="aEmail" type="email" required autocomplete="email" placeholder="voce@email.com"></div>
+    <div class="field"><label>SENHA</label><input id="aPass" type="password" required minlength="6" autocomplete="current-password" placeholder="mínimo 6 caracteres"></div>
+    <button class="big" id="aBtn" type="submit">ENTRAR</button>
+    <div class="msg" id="aMsg"></div>
+  </form>
+</div></div></section>
+
+<!-- ===================== LOBBY ===================== -->
+<section id="vLobby" class="view"><div class="lobby">
+  <div class="lhead">
+    <div class="logo"><b>CABINE</b><small>ONLINE</small></div>
+    <div class="spacer"></div>
+    <div class="who"><span class="av" id="meAv">?</span><span id="meName">—</span></div>
+    <button class="sm" id="logout">SAIR</button>
+  </div>
+  <div class="lgrid">
+    <div class="lcard">
+      <h3><i>●</i> CRIAR UMA SALA</h3>
+      <form id="createForm">
+        <div class="field"><label>NOME DA SALA</label><input id="cName" maxlength="40" placeholder="Ex.: B2B de sexta"></div>
+        <button class="big" type="submit">CRIAR SALA</button>
+      </form>
+      <p class="howto">Você recebe um código de 6 letras. Mande o código (ou o link de convite) para quem vai tocar com você.</p>
+    </div>
+    <div class="lcard">
+      <h3><i>●</i> ENTRAR COM CÓDIGO</h3>
+      <form id="joinForm">
+        <div class="field"><label>CÓDIGO DA SALA</label><input id="jCode" class="code" maxlength="6" placeholder="ABC123" required></div>
+        <div class="field"><label>ENTRAR COMO</label><select id="jRole"><option value="dj">DJ (pode tocar)</option><option value="spectator">ESPECTADOR (só ouve)</option></select></div>
+        <button class="big" type="submit">ENTRAR NA SALA</button>
+      </form>
+    </div>
+    <div class="lcard rooms">
+      <h3><i>●</i> SUAS SALAS</h3>
+      <div class="rlist" id="rList"><div class="empty-list">Carregando…</div></div>
+    </div>
+  </div>
+  <div class="msg" id="lMsg"></div>
+</div></section>
+
+<!-- ===================== SALA (MESA) ===================== -->
+<section id="room">
+  <header class="top">
+    <div class="logo"><b>CABINE</b><small>ONLINE</small></div>
+    <div class="roomtag"><span class="rname" id="rName">Sala</span><span class="rcode" id="rCode">——————</span><button id="copyInvite" title="Copiar link de convite">CONVITE</button></div>
+    <div class="tgroup">
+      <button class="tbtn" data-mode="2">2 DECKS</button>
+      <button class="tbtn on" data-mode="4">4 DECKS</button>
+    </div>
+    <button class="tbtn" id="themeBtn">TEMA</button>
+    <span class="spect-note">ESPECTADOR</span>
+    <div class="spacer"></div>
+    <div class="peers" id="peers"></div>
+    <button class="tbtn" id="leaveBtn">SAIR DA SALA</button>
+  </header>
+  <main id="wrap"><div id="stage" data-mode="4"></div></main>
+  <footer class="bottom">
+    <button class="bbtn" id="loadAll">CARREGAR FAIXAS</button>
+    <input type="file" id="multiFile" accept="audio/*" multiple hidden>
+    <button class="bbtn" id="helpBtn">AJUDA</button>
+    <span class="conn" id="conn"><i class="dot"></i><span>CONECTANDO…</span></span>
+    <div class="spacer"></div>
+    <button class="bbtn" id="chatBtn">CHAT<span class="badge" id="chatBadge" hidden>0</span></button>
+    <span class="clock" id="clock">00:00</span>
+  </footer>
+</section>
+
+<aside id="chat">
+  <header>CHAT DA SALA <button id="chatClose">×</button></header>
+  <div id="chatList"></div>
+  <form id="chatForm"><input id="chatIn" maxlength="300" placeholder="Escreva uma mensagem…" autocomplete="off"><button class="sm pri" type="submit">ENVIAR</button></form>
+</aside>
+<div id="toast"></div>
+
+<div id="modal"><div class="mcard">
+  <h3>COMO FUNCIONA A SALA</h3>
+  <p><b>Todos ouvem a mesma mixagem.</b> Quando um DJ carrega uma música, ela vai para a nuvem e é baixada por todos da sala. Cada comando (play, cue, tempo, faders, efeitos) chega para todos com o horário do servidor, e cada computador toca a mixagem localmente, sincronizada. Por isso não importa a distância: as faixas continuam alinhadas na batida.</p>
+  <table>
+    <tr><td>Deck 1: tocar/pausar · cue</td><td>Q · A</td></tr>
+    <tr><td>Deck 2: tocar/pausar · cue</td><td>W · S</td></tr>
+    <tr><td>Deck 3: tocar/pausar · cue</td><td>O · K</td></tr>
+    <tr><td>Deck 4: tocar/pausar · cue</td><td>P · L</td></tr>
+    <tr><td>Crossfader para A / B · centro</td><td>← / → · ↓</td></tr>
+  </table>
+  <p><b>BPM e grid:</b> ao carregar, a faixa é analisada e ganha um grid. Se ficar deslocado use GRID ◀ / ▶ (Shift = fino); BPM pela metade ou em dobro, ÷2 / ×2; compasso na batida errada, BAR 1▸.</p>
+  <p><b>MASTER e SYNC:</b> o deck MASTER é a referência. SYNC iguala o BPM e alinha o compasso. Fader de tempo, jog e − / + desligam o SYNC.</p>
+  <p><b>Na mão:</b> iguale o BPM pelo fader e segure − ou + até as marcas vermelhas do master (no topo da onda) coincidirem com as linhas brancas da sua faixa. O medidor de fase mostra o desvio em ms (verde = sincronizado).</p>
+  <p><b>PHONES</b> (no canto esquerdo do mixer) muda só o volume que você ouve. O <b>MASTER LEVEL</b> muda para todos. O <b>BEAT FX</b> acompanha sozinho o BPM do deck MASTER.</p>
+  <button class="tbtn close" id="closeModal">FECHAR</button>
+</div></div>
+
+<svg width="0" height="0" style="position:absolute"><defs><radialGradient id="kg" cx="50%" cy="35%" r="70%"><stop offset="0" stop-color="#3a3e48"/><stop offset=".6" stop-color="#1c1e24"/><stop offset="1" stop-color="#0d0e11"/></radialGradient></defs></svg>
+<script src="config.js"></script>
+<script src="net.js"></script>
+<script src="mixer.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
