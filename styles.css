@@ -359,3 +359,5 @@ body.spect #stage .mx-phones{pointer-events:auto}
 .badge[hidden]{display:none}
 .mx-h em{display:block;margin-top:2px}
 .mx-phones .mx-h{display:block}
+
+[hidden]{display:none!important}
