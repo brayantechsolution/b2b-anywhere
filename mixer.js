@@ -120,7 +120,7 @@ function applyKey(k) {
 function buildMixer() {
   const el = document.createElement("section"); el.className = "mixer mx";
   el.innerHTML = `
-  <div class="mx-plate"><span class="mx-brand">CABINE</span><span class="mx-model">MX-4 · 4 CHANNEL CLUB MIXER</span></div>
+  <div class="mx-plate"><span class="mx-brand">B2B ANYWHERE</span><span class="mx-model">MX-4 · 4 CHANNEL CLUB MIXER</span></div>
   <div class="mx-body">
     <div class="mx-side mx-left">
       <div class="mx-sec"><div class="mx-h">SOUND COLOR FX</div><div class="mx-cfx"></div><div class="mx-param"></div></div>

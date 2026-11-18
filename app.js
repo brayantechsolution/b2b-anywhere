@@ -1,5 +1,5 @@
 /* =====================================================================
-   CABINE ONLINE — mesa de DJ sincronizada pela internet
+   B2B ANYWHERE — mesa de DJ sincronizada pela internet
    Como a sincronização funciona:
    - Cada deck tem um estado compartilhado (s) com uma "âncora": no horário
      de servidor aT o deck estava na posição aP, tocando com a taxa rate(s).

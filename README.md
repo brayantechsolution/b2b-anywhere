@@ -1,4 +1,4 @@
-# B2B Anywhere · Cabine Online
+# B2B Anywhere
 
 Mesa de DJ no navegador para tocar **B2B sincronizado pela internet**: 4 decks com BPM, grid e SYNC estilo CDJ, mixer de clube com Sound Color FX e Beat FX, salas com código, cadastro e chat.
 
@@ -82,7 +82,7 @@ A chave *anon/publishable* é feita para ficar no site. **Nunca** use a `service
 **Opção mais fácil — Netlify Drop**
 
 1. Abra https://app.netlify.com/drop e faça login.
-2. Arraste a **pasta inteira** `cabine-online` para a página.
+2. Arraste a **pasta inteira** do projeto para a página.
 3. Pronto: ele gera um endereço `https://algum-nome.netlify.app`. Dá para trocar o nome em *Site configuration*.
 
 **Vercel**

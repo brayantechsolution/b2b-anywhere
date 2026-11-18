@@ -1,5 +1,5 @@
 /* =====================================================================
-   Camada de rede da Cabine Online
+   Camada de rede do B2B Anywhere
    - supabaseNet: produção (cadastro, salas, músicas e tempo real no Supabase)
    - demoNet:     demonstração local (duas abas no mesmo computador)
    ===================================================================== */
